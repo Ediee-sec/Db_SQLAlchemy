@@ -1,11 +1,21 @@
 from main import  produtos
-from entrada import insere_produto
+from entrada import rRet, qQuery
 
-def insert():
-    produto = produtos(codProd = insere_produto.codigo_produto(True),
-                       desProd = insere_produto.descri_produto(True))
-    print(produto)
+def insere_produtos():
+    produto = produtos(codProd = rRet.codigo_produto(),
+                       desProd = rRet.descri_produto())
+    produto.comita()
+
+
+def consulta():
+    cQuery = produtos.query.filter_by(codProd = qQuery.codigo()).first()
+    print(cQuery)
 
 if __name__ == '__main__':
-    insert()
+    opc = input('Informe oque deseja fazer no Db\nInserir = 1\nconsultar = 2\n')
+    if opc == '1':
+        insere_produtos()
+    elif opc == '2':
+        consulta()
+
 

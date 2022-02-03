@@ -25,13 +25,17 @@ class produtos(base):
     codProd = Column(String(9), index=True)
     desProd = Column(String(30))
 
+    def comita(self):
+        db_session.add(self)
+        db_session.commit()
+
     def __repr__(self):
         return f'Descrição do produto: {self.desProd}\nCódigo do Produto: {self.codProd}'
 
 class funcionarios(base):
     __tablename__= 'funcionarios'
     id = Column(Integer, primary_key=True)
-    nomeFun = Column(String(10), index=True)
+    nomeFun = Column(String(10))
     sobrFun = Column(String(15))
     dataNas = Column(DATETIME())
 
@@ -50,37 +54,31 @@ if __name__ == '__main__':
 2. **Modulo entrada, responsável por criar as classes e métodos que irão retornar os valores digitados pelo usuário na interface**
 
 ```Python
-from time import strftime, localtime
-from datetime import datetime
-
 class insere_produto():
     def __init__(self):
-        self.produto = int(input('Qual o código: '))
-        self.descricao = str(input('Descrição do produto: '))
+        self.produto = ''
+        self.descricao = ''
 
     def codigo_produto(self):
-        return rRet.produto
+        self.produto = input('Qual o código: ')
+        resultado = self.produto
+        return resultado
     def descri_produto(self):
-        return rRet.descricao
+        self.descricao = input('Qual a Descricao: ')
+        resultado = self.descricao
+        return resultado
 
 rRet = insere_produto()
 
-class insere_funcionario():
+class query():
     def __init__(self):
-        self.nome = str(input('Nome do Funcionário: '))
-        self.sobrenome = str(input('Sobrenome do Funcionário: '))
-        self.datanasc = datetime.strptime(input("Data de Nascimento: "), '%d/%m/%Y')
+        self.cod = ''
 
-    def nome_funcionario(self):
-        return lRet.nome
-    def sobrenome_funcionario(self):
-        return lRet.sobrenome
-    def data_funcionario(self):
-        return lRet.datanasc
-    def idade_funcionario(self):
-        var_funcionario = datetime.today() - lRet.datanasc()
-        return var_funcionario
-lRet = insere_funcionario()
+    def codigo(self):
+        self.cod = (input('Informe o codigo da Consulta: '))
+        resultado = self.cod
+        return resultado
+qQuery = query()
 ```
 ****
 
@@ -89,15 +87,27 @@ lRet = insere_funcionario()
 
 ```Python
 from main import  produtos
-from entrada import insere_produto
+from entrada import rRet, qQuery
 
-def insert():
-    produto = produtos(codProd = insere_produto.codigo_produto(True),
-                       desProd = insere_produto.descri_produto(True))
-    print(produto)
+def insere_produtos():
+    produto = produtos(codProd = rRet.codigo_produto(),
+                       desProd = rRet.descri_produto())
+    produto.comita()
+
+
+def consulta():
+    cQuery = produtos.query.filter_by(codProd = qQuery.codigo()).first()
+    print(cQuery)
 
 if __name__ == '__main__':
-    insert()
+    opc = input('Informe oque deseja fazer no Db\nInserir = 1\nconsultar = 2\n')
+    if opc == '1':
+        insere_produtos()
+    elif opc == '2':
+        consulta()
+
+
+
 
 
 ```

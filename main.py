@@ -14,13 +14,17 @@ class produtos(base):
     codProd = Column(String(9), index=True)
     desProd = Column(String(30))
 
+    def comita(self):
+        db_session.add(self)
+        db_session.commit()
+
     def __repr__(self):
         return f'Descrição do produto: {self.desProd}\nCódigo do Produto: {self.codProd}'
 
 class funcionarios(base):
     __tablename__= 'funcionarios'
     id = Column(Integer, primary_key=True)
-    nomeFun = Column(String(10), index=True)
+    nomeFun = Column(String(10))
     sobrFun = Column(String(15))
     dataNas = Column(DATETIME())
 

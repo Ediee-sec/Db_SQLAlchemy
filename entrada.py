@@ -1,31 +1,30 @@
-from time import strftime, localtime
-from datetime import datetime
-
 class insere_produto():
     def __init__(self):
-        self.produto = int(input('Qual o código: '))
-        self.descricao = str(input('Descrição do produto: '))
+        self.produto = ''
+        self.descricao = ''
 
     def codigo_produto(self):
-        return rRet.produto
+        self.produto = input('Qual o código: ')
+        resultado = self.produto
+        return resultado
     def descri_produto(self):
-        return rRet.descricao
+        self.descricao = input('Qual a Descricao: ')
+        resultado = self.descricao
+        return resultado
 
 rRet = insere_produto()
 
-class insere_funcionario():
+class query():
     def __init__(self):
-        self.nome = str(input('Nome do Funcionário: '))
-        self.sobrenome = str(input('Sobrenome do Funcionário: '))
-        self.datanasc = datetime.strptime(input("Data de Nascimento: "), '%d/%m/%Y')
+        self.cod = ''
 
-    def nome_funcionario(self):
-        return lRet.nome
-    def sobrenome_funcionario(self):
-        return lRet.sobrenome
-    def data_funcionario(self):
-        return lRet.datanasc
-    def idade_funcionario(self):
-        var_funcionario = datetime.today() - lRet.datanasc()
-        return var_funcionario
-lRet = insere_funcionario()
+    def codigo(self):
+        self.cod = (input('Informe o codigo da Consulta: '))
+        resultado = self.cod
+        return resultado
+qQuery = query()
+
+
+
+
+
